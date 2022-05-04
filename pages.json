@@ -42,6 +42,23 @@
             
         }
     ],
+    "subPackages": [
+      {
+        "root": "subpkg",
+        "pages": [
+          
+        {
+                    "path" : "goods-list/goods-list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+      }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
     // 头部标题

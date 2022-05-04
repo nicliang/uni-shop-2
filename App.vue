@@ -6,6 +6,12 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+      //  const url = location.href
+      
+      //     if(url.indexOf('/pyg')) {
+      //         console.log('www.uinav.com/pyg');
+      //         // 这里用api跳转到page.json内配置过的页面，通过在url后面接参数来显示不同的页面。
+      //     }
 		},
 		onHide: function() {
 			console.log('App Hide')
