@@ -18,9 +18,8 @@ $http.beforeRequest = function (options) {
 }
 // 请求完成之后做一些事情
 $http.afterRequest = function (response) {
-  response.data.message.forEach(item=>{  
-  }
-  )
+
+
   uni.hideLoading()
 }
 

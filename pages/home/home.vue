@@ -73,7 +73,7 @@
           // console.log(res.message[0].image_src)
           var new_list= []
                  
-          uni.$showMeg("数据加载成功")
+          // uni.$showMeg("数据加载成功")
     
        
       },
