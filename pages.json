@@ -56,6 +56,42 @@
                 }
                 
                 }
+                ,{
+                    "path" : "search/search",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                // ,{
+                //     "path" : "goods-detail/goods-detail",
+                //     "style" :                                                                                    
+                // {
+                //     "navigationBarTitleText": "",
+                //     "enablePullDownRefresh": false
+                // }
+                
+                // }
+                // ,{
+                //     "path" : "goods-detail/goods-detail",
+                //     "style" :                                                                                    
+                // {
+                //     "navigationBarTitleText": "",
+                //     "enablePullDownRefresh": false
+                // }
+                
+                // }
+                ,{
+                    "path" : "goods-detail/goods-detail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
       }
     ],

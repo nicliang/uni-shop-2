@@ -1,5 +1,12 @@
 <template>
   <view>
+    <!-- 搜索组件 -->
+    <!-- uniapp中组件不支持@click事件需要自己定义 
+     这里的click是子组件提交的this.$emit('myclick')
+     再新建pkg子页面，当点击的时候自动跳转搜索页面
+     -->
+    <my-search @click="gotosearch"></my-search>
+    <!--  -->
     <view class="scroll-content" >
       <scroll-view scroll-y="true" :style="{height:wh +'px'}" class="scroll-left">
         <block v-for="(item,i) in catelist" :key="i">
@@ -11,7 +18,7 @@
           <view class="cateLevel2-title">/{{items2.cat_name}}/</view>
           <view class="cate-lv3-item3">
             <view class="cate-lv3-item" v-for="(item3,i3) in items2.children" @click="gotocatelist(item3)">
-              <image :src="item3.cat_icon" ></image>
+              <image :src="item3.caticon" ></image>
               <text>{{item3.cat_name}}</text>
             </view>
           </view>
@@ -37,7 +44,7 @@
     },
     onLoad(){
       const sysinfo= uni.getSystemInfoSync()
-      this.wh=sysinfo.windowHeight
+      this.wh=sysinfo.windowHeight- 50
       // 调用获取分类列表数据的方法
         this.getCateList()
     },
@@ -45,6 +52,26 @@
       async getCateList(){
        const {data : res} = await uni.$http.get('/api/public/v1/categories')
        if(res.meta.status!==200) return uni.showMeg()
+       res.message.forEach(item=>{
+         item.children.forEach(childs=>{
+        
+          childs.children&&childs.children.forEach((its,index)=>{
+            // console.log(its,typeof its)
+            if(typeof its ==='object'){
+            its.caticon= 'http://210.21.98.31:6005'+its.cat_icon.split('9090')[1]
+                   // console.log(its.caticon)
+             // its.childer&&its.childer.forEach(items=>{
+             //   console.log(items)
+             // })  
+            }
+
+               
+        
+           
+           })
+         })
+       })
+       console.log(res.message)
        this.catelist=res.message
        this.cateLevel2= res.message[0].children
       },
@@ -58,8 +85,12 @@
         uni.navigateTo({
           url:'/subpkg/goods-list/goods-list?cid='+item.cat_id
         })
+      },
+      gotosearch(){
+       uni.navigateTo({
+         url:'/subpkg/search/search'
+       })
       }
-      
     }
   }
 </script>

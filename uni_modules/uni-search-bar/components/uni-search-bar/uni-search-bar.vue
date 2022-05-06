@@ -99,8 +99,9 @@ s<template>
 		},
 		data() {
 			return {
-				show: false,
-				showSync: false,
+        // 这两个项是自动获取焦点
+				show: true,
+				showSync: true,
 				searchVal: ''
 			}
 		},
