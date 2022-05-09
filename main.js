@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 // 导入网络请求包
-import { $http } from '@escook/request-miniprogram'  
+import { $http } from '@escook/request-miniprogram' 
+import store from './store/store.js'
 uni.$http = $http
 // https://www.escook.cn
 //https://api-ugo-web.itheima.net
@@ -37,7 +38,9 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
+    // 挂载vue实例
+    store
 })
 app.$mount()
 // #endif

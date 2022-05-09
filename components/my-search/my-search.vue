@@ -17,7 +17,7 @@
     },
     methods:{
       searchClick(){
-        console.log("children")
+        // console.log("children")
         this.$emit("click")
       }
     }

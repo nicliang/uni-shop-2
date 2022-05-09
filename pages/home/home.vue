@@ -43,7 +43,10 @@
 </template>
 
 <script>
+import mixins from '@/mixins/mixins.js'
   export default {
+    // 这个必须要赋值，不能按照es6写法，赋值数组
+    mixins:[mixins],
     data() {
       return {
         swiperList:[],

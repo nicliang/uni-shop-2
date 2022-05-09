@@ -24,7 +24,7 @@
         </view>
         <!-- 运费 -->
         <view class="goods-express">
-          快递：<text>免运费</text>
+          快递：<text>免运费 </text>
         </view>
       </view>
       <!-- 渲染商品详情页 -->
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import {mapState,mapMutations,mapGetters} from 'vuex'
   export default {
     data() {
       return {
@@ -50,7 +51,7 @@
         		}, {
         			icon: 'cart',
         			text: '购物车',
-        			info: 66
+        			info: 0
         		}],
         	    buttonGroup: [{
         	      text: '加入购物车',
@@ -65,12 +66,36 @@
         	    ]
       };
     },
+    computed:{
+      // 这里要调用指定的具体数据必要用数组形式调用，前面可以加导入store的名字
+     // 用逗号隔开
+      ...mapState('my_cart',['cart']),
+      ...mapGetters('my_cart',['total'])
+      
+    },
     onLoad(option){
       const goods_id = option.goods_id
       this.getdetail(goods_id)
       
     },
+    watch:{
+      // 这个newValue是getter  return 回来的值
+      // total(newValue){
+      //   const op = this.options.find( y=>y.text==="购物车")
+      //   op.info=newValue
+      // }
+      total:{
+        // 优化后的，挂载完以后，立刻加载这个数据
+        handler(newValue){
+          const op = this.options.find( y=>y.text==="购物车")
+          op.info=newValue
+        },
+        immediate:true
+      }
+    },
     methods:{
+      ...mapMutations('my_cart',['addToCart']),
+      
       async getdetail(goods_id){
         // 这里get内部 可以用拼接的方法接收参数也行，或者用地址后面用逗号分隔传一个对象
        const {data:res}= await uni.$http.get('/api/public/v1/goods/detail',{goods_id})
@@ -91,13 +116,27 @@
         })
       },
       onClick(e){
-        console.log(e)
+        
         if(e.content.icon==='cart'){
           uni.switchTab({
             url:'/pages/cart/cart'
           })
         }
-        
+      },
+      buttonClick(e){
+        if(e.content.text==="加入购物车"){
+          const goods = {
+           // / { goods_id, goods_name, goods_price, goods_count, goods_small_logo, goods_state }
+           goods_id: this.goodsdetail.goods_id,
+           goods_name: this.goodsdetail.goods_name,
+           goods_price: this.goodsdetail.goods_price,
+           goods_count: 1,
+           goods_small_logo: this.goodsdetail.goods_small_logo,
+           goods_state : true
+          }
+           this.addToCart(goods)
+           // console.log(this.cart)
+        }
       }
     }
   }

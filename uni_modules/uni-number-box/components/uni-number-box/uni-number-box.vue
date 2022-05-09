@@ -131,7 +131,13 @@
 			},
 			_onBlur(event) {
 				this.$emit('blur', event)
-				let value = event.detail.value;
+				// let value = event.detail.value;
+        let value = parseInt(event.detail.value);
+        // 解决uni-number-box 输入的内容不合法，比如输入是：a2字符串
+        if(!value){
+          this.inputValue=1;
+          return
+        }
 				if (isNaN(value)) {
 					this.inputValue = this.min;
 					return;
